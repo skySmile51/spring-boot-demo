@@ -97,6 +97,14 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <!-- JDK 21+：显式启用 Agent，避免 Mockito 运行时 self-attach 告警（需 inline mock 时可改用下方 javaagent） -->
+          <argLine>-XX:+EnableDynamicAgentLoading -Xshare:off</argLine>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
