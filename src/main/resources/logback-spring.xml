@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 1. 控制台输出 (使用 Spring Boot 默认的彩色格式) -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) [%thread] %cyan(%logger{36}) - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 2. 自定义告警 Appender -->
+    <appender name="DINGTALK_ALARM" class="com.dev.skyskill.logging.DingTalkAlarmAppender">
+        <!-- 可以在这里配置 Webhook URL，但目前我们在代码里写死了 -->
+    </appender>
+
+    <!-- 3. 根级别配置：INFO级别打印到控制台，同时挂载告警Appender -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="DINGTALK_ALARM" />
+    </root>
+</configuration>

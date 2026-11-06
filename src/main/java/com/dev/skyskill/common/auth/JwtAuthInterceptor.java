@@ -4,11 +4,13 @@ import com.dev.skyskill.common.exception.UnauthorizedException;
 import com.dev.skyskill.common.redis.RedisCacheService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+@Slf4j
 @Component
 public class JwtAuthInterceptor implements HandlerInterceptor {
 
