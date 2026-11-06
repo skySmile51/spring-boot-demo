@@ -1,6 +1,7 @@
 package com.dev.skyskill.service.impl;
 
-import com.dev.skyskill.mapper.UserMapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.dev.skyskill.dao.mapper.UserMapper;
 import com.dev.skyskill.dao.entity.UserDO;
 import com.dev.skyskill.service.UserService;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,11 @@ public class UserServiceImpl implements UserService {
       throw new RuntimeException("用户不存在");
     }
     return user;
+  }
+
+  @Override
+  public UserDO findByPhone(String phone) {
+    return userMapper.selectOne(
+        new LambdaQueryWrapper<UserDO>().eq(UserDO::getPhone, phone));
   }
 }

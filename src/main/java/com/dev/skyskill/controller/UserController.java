@@ -3,11 +3,10 @@ package com.dev.skyskill.controller;
 import com.dev.skyskill.dao.entity.UserDO;
 import com.dev.skyskill.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/users") // 统一给这个 Controller 的接口加上前缀
@@ -22,5 +21,15 @@ public class UserController {
   public UserDO getUser(@PathVariable Long id) {
     // Controller 完全不关心数据怎么来的，直接调用 Service
     return userService.getUserById(id);
+  }
+
+  @PostMapping("/list")
+  public void getCollect(@RequestParam("ids") List<Long> ids) {
+    if (CollectionUtils.isEmpty(ids)) {
+      return;
+    }
+
+    Set<Long> uniqueIds = new HashSet<>(ids);
+    System.out.println(uniqueIds);
   }
 }
